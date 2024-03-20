@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mostrar Imágenes</title>
+</head>
+
+<body>
+
+    <div class="title">Fotos Escolares Galeria</div>
+    <div class="desc">Sientete libre de usar las fotos que gustes son totalmente grátis. 😀 Solamente, mencionanos en
+        tus trabajos.</div>
+
+    <div id="galeria-imagenes"></div>
+
+    <style>
+        .title {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .desc {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin-bottom: 20px;
+        }
+
+        #galeria-imagenes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-auto-rows: auto;
+            gap: 20px;
+            padding: 10px;
+        }
+
+        #galeria-imagenes img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            /* Opcional: añade bordes redondeados a las imágenes */
+            background-color: rgb(221, 221, 221);
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+
+    <script>
+        const imagenes = [];
+
+        for (let i = 1; i <= 132; i++) {
+            imagenes.push({
+                nombre: `fotos/${i}.webp`,
+                anio: 2000 + i % 24 // Esto asegura que el año esté en el rango de 2000 a 2023
+            });
+        }
+
+        const divImagenes = document.getElementById('galeria-imagenes');
+
+        // Función para cargar todas las imágenes en el div de forma aleatoria
+        function cargarImagenes() {
+            // Desordena aleatoriamente el array de imágenes
+            imagenes.sort(() => Math.random() - 0.5);
+
+            imagenes.forEach(imagen => {
+                // Crea el elemento de imagen
+                const imgElement = document.createElement('img');
+                imgElement.src = imagen.nombre; // Usa la propiedad 'nombre' del objeto
+                imgElement.alt = 'Foto no disponible';
+
+                // Crea un contenedor para la imagen y el anio
+                const contenedorImagen = document.createElement('div');
+                contenedorImagen.classList.add('contenedor-imagen');
+
+                // Agrega la imagen al contenedor
+                contenedorImagen.appendChild(imgElement);
+
+                // Crea el div para el anio
+                const anioElement = document.createElement('div');
+                anioElement.classList.add('anio-imagen');
+                anioElement.textContent = `Año: ${imagen.anio}`; // Usa la propiedad 'anio' del objeto
+
+                // Agrega el div del anio al contenedor
+                contenedorImagen.appendChild(anioElement);
+
+                // Añade el contenedor de la imagen al div principal
+                divImagenes.appendChild(contenedorImagen);
+            });
+        }
+
+        // Llamar a la función para cargar las imágenes
+        cargarImagenes();
+
+        // Llamar a la función para cargar las imágenes
+        cargarImagenes();
+
+    </script>
+
+</body>
+
+</html>
